@@ -13,28 +13,24 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
     <!-- vis.js -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet">
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
     <!-- vis.js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-    <!-- Graph Reader JavaScript -->    
+    <!-- Graph Reader JavaScript -->
     <script type="text/javascript" src="./reader.js"></script>
 </head>
 
 <body>
     <main id="page-content" role="main">
-        <div class="container pt-4 pt-lg-5 pb-3 vh-100 d-flex flex-column align-items-center">
-            <div class="row w-100 justify-content-center mb-3">
-                <div class="col col-12 col-md-9 col-lg-6 col-xl-5">
-                    <h4 class="text-center">Terceira atividade - Estrutura de dados II</h4>
+        <div class="container pt-4 pt-lg-5 pb-3">
+            <div class="row mb-3">
+                <div class="col col-12 col-md-9 col-lg-6 col-xl-5 mx-auto">
+                    <h4 class="text-center mb-3">Leitor de Grafos</h4>
                     <ol class="small font-italic" type="a">
                         <li>leia o numero de vértices</li>
                         <li>leia o numero de arestas</li>
@@ -42,26 +38,37 @@
                         <li>represente o grafo internamente em uma matriz ou lista de adjacência</li>
                         <li>informe se o grafo é regular ou não</li>
                     </ol>
-                    <form action="" id="readerForm" onsubmit="return processFormData(event);">
-                        <div class="form-group">
-                            <label for="numVertexes">Número de vertices</label>
-                            <input type="text" class="form-control" id="numVertexes" placeholder="Digite o número">
+                    <form action="" id="readerForm" class="px-md-3 px-lg-4 px-xl-5" onsubmit="return processFormData(event);">
+                        <div class="form-row">
+                            <div class="form-group col col-12 col-lg-6">
+                                <label for="numVertexes">Número de vertices</label>
+                                <input type="text" class="form-control" id="numVertexes" placeholder="Digite o número">
+                            </div>
+                            <div class="form-group col col-12 col-lg-6">
+                                <label for="numEdges">Número de arestas</label>
+                                <input type="text" class="form-control" id="numEdges" placeholder="Digite o número">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="numEdges">Número de arestas</label>
-                            <input type="text" class="form-control" id="numEdges" placeholder="Digite o número">
-                        </div>
-                        <button type="submit" class="btn btn-green d-block mx-auto">Definir Arestas</button>
+                        <button type="submit" class="btn btn-success d-block mx-auto">Definir Arestas</button>
                     </form>
+                    <div class="alerts"></div>
                 </div>
             </div>
-            <div class="alerts"></div>
-            <div class="row w-100 px-lg-5">
+            <div class="row px-lg-5">
                 <div class="col col-12 col-md-6 col-lg-8 pr-lg-5" id="visual-graph" style="max-height: 400px;"></div>
                 <div class="col col-12 col-md-6 col-lg-4 pr-lg-5" id="adjacency-list"></div>
             </div>
         </div>
     </main>
+    <footer>
+        <div class="container">
+            <div class="row py-1">
+                <div class="col col-12 text-center py-1">
+                    <a href="https://github.com/Landlucas/graph-reader" target="_blank" class="lead py-1" style="opacity: 0.33;"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
