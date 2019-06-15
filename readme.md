@@ -11,6 +11,10 @@ Os requerimentos do trabalho constavam:
 
 ## Dependências usadas
 
-* [Bootstrap](https://github.com/twbs/bootstrap) - para o visual
+* [Bootstrap](https://github.com/twbs/bootstrap) - para o visual geral
 * [Fontawesome Free](https://github.com/FortAwesome/Font-Awesome) - para os ícones
-* [vis.js](https://github.com/visjs/vis_original) - para a representação visual
+* [vis.js](https://github.com/visjs/vis_original) - para a representação visual do grafo
+
+## Licença
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

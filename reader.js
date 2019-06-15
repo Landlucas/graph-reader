@@ -2,7 +2,7 @@
  * Graph reader
  * 
  * @author  Lucas Land <land.lucas@outlook.com>
- * @date    2019-06-14
+ * @date    2019-06-15
  * @license MIT License (http://opensource.org/licenses/MIT)
  */
 
