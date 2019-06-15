@@ -29,14 +29,25 @@ async function processFormData(e) {
     numEdges = parseInt(document.getElementById('numEdges').value);
     if (numVertexes > 0 && numEdges > 0 && !readerForm.querySelector('.edge-group')) {
         if (numEdges >= numVertexes) {
-            createAlert('Número de arestas deve ser menor de que vertices', 'danger', 'error-2');
+            createAlert('Número de arestas deve ser menor de que vertices.', 'danger', 'error-2');
+            return;
         } else {
             await createEdgeFields();
         }
     } else if (!numVertexes > 0 || !numEdges > 0) {
-        createAlert('Preencha o número de vertices e/ou arestas', 'danger', 'error-1');
+        createAlert('Preencha o número de vertices e/ou arestas.', 'danger', 'error-1');
+        return;
     } else if (readerForm.querySelector('.edge-group')) {
-        adjacencyList = await populateAdjList(document.querySelectorAll('.edge-item'));
+        await removeAlerts('danger');
+        let edgeItems = document.querySelectorAll('.edge-item');
+        for (let i = 0; i < edgeItems.length; i++) {
+            if (edgeItems[i].querySelector('.edge-field-from').value.length == 0 || edgeItems[i].querySelector('.edge-field-to').value.length == 0) {
+                createAlert('Defina os vértices de todas arestas.', 'danger', 'error-3');
+                return;
+            }
+        }
+        adjacencyList = await populateAdjList(edgeItems);
+        if (!adjacencyList) return;
         if (typeof visualGraph === 'object') visualGraph.destroy();
         visualGraph = createVisualGraph();
         showAdjListTable(document.body.querySelector('#adjacency-list'), adjacencyList);
@@ -47,7 +58,7 @@ async function processFormData(e) {
 /**
  * Populate our adjacent list from our form fields.
  * @param {Object} edgeInputGroup The edge input group with '.edge-field-from' and '.edge-field-to' as children
- * @returns {array} list
+ * @returns {array|boolean} list
  */
 async function populateAdjList(edgeInputGroup) {
     list = [];
@@ -57,6 +68,14 @@ async function populateAdjList(edgeInputGroup) {
     for (let i = 0; i < edgeInputGroup.length; i++) {
         let vertexFrom = parseInt(edgeInputGroup[i].querySelector('.edge-field-from').value);
         let vertexTo = parseInt(edgeInputGroup[i].querySelector('.edge-field-to').value);
+        if (vertexFrom === vertexTo) {
+            createAlert('Arestas necessitam de dois vértices diferentes.', 'danger', 'error-4');
+            return false;
+        }
+        if (vertexFrom > numVertexes || vertexTo > numVertexes) {
+            createAlert('Informe números de vértices válidos.', 'danger', 'error-5');
+            return false;
+        }
         if (!list[vertexFrom].includes(vertexTo)) {
             list[vertexFrom].push(vertexTo);
             list[vertexTo].push(vertexFrom);
@@ -252,6 +271,5 @@ async function removeAlerts(alertClass = 'danger') {
  */
 async function removeAlert(alert) {
     alert.classList.remove('show');
-    await sleep(200);
     alert.remove();
 }

@@ -9,13 +9,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="author" content="Lucas Land">
     <title>Graph Reader</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- vis.js -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet">
-    <!-- JQuery -->
+    <!-- jQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -41,7 +41,7 @@
                     <form action="" id="readerForm" class="px-md-3 px-lg-4 px-xl-5" onsubmit="return processFormData(event);">
                         <div class="form-row">
                             <div class="form-group col col-12 col-lg-6">
-                                <label for="numVertexes">Número de vertices</label>
+                                <label for="numVertexes">Número de vértices</label>
                                 <input type="text" class="form-control" id="numVertexes" placeholder="Digite o número">
                             </div>
                             <div class="form-group col col-12 col-lg-6">
@@ -54,7 +54,7 @@
                     <div class="alerts"></div>
                 </div>
             </div>
-            <div class="row px-lg-5">
+            <div class="row py-3 px-lg-5">
                 <div class="col col-12 col-md-6 col-lg-8 pr-lg-5" id="visual-graph" style="max-height: 400px;"></div>
                 <div class="col col-12 col-md-6 col-lg-4 pr-lg-5" id="adjacency-list"></div>
             </div>
