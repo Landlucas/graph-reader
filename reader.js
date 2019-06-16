@@ -27,6 +27,8 @@ async function processFormData(e) {
     e.preventDefault();
     numVertexes = parseInt(document.getElementById('numVertexes').value);
     numEdges = parseInt(document.getElementById('numEdges').value);
+
+    // First state, reading number of vertexes and edges
     if (numVertexes > 0 && numEdges > 0 && !readerForm.querySelector('.edge-group')) {
         if (numEdges >= numVertexes) {
             createAlert('Número de arestas deve ser menor de que vertices.', 'danger', 'error-2');
@@ -37,6 +39,8 @@ async function processFormData(e) {
     } else if (!numVertexes > 0 || !numEdges > 0) {
         createAlert('Preencha o número de vertices e/ou arestas.', 'danger', 'error-1');
         return;
+
+    // Second state, reading all defined edges 
     } else if (readerForm.querySelector('.edge-group')) {
         await removeAlerts('danger');
         let edgeItems = document.querySelectorAll('.edge-item');
@@ -49,7 +53,7 @@ async function processFormData(e) {
         adjacencyList = await populateAdjList(edgeItems);
         if (!adjacencyList) return;
         if (typeof visualGraph === 'object') visualGraph.destroy();
-        visualGraph = createVisualGraph();
+        createVisualGraph().then(r => visualGraph = r);
         showAdjListTable(document.body.querySelector('#adjacency-list'), adjacencyList);
     }
     return;
@@ -72,7 +76,7 @@ async function populateAdjList(edgeInputGroup) {
             createAlert('Arestas necessitam de dois vértices diferentes.', 'danger', 'error-4');
             return false;
         }
-        if (vertexFrom > numVertexes || vertexTo > numVertexes) {
+        if (vertexFrom >= numVertexes || vertexTo >= numVertexes) {
             createAlert('Informe números de vértices válidos.', 'danger', 'error-5');
             return false;
         }
@@ -184,7 +188,6 @@ function isGraphRegular(adjList) {
         adjNumber = adjList[0].length;
         for (let i = 0; i < adjList.length; i++) {
             if (adjNumber != adjList[i].length) return false;
-            console.log('adjList[' + i + '].length = ' + adjList[i].length);
         }
     }
     return true;
@@ -196,7 +199,7 @@ function isGraphRegular(adjList) {
 async function createEdgeFields() {
     let fieldRow = document.createElement('div');
     fieldRow.className = 'edge-group form-group px-lg-5';
-    readerForm.insertBefore(fieldRow, readerForm.querySelector('button[type="submit"]'));
+    readerForm.insertBefore(fieldRow, readerForm.querySelector('.form-submit-group'));
 
     for (let i = 0; i < numEdges && i < 99; i++) {
         let group = document.createElement('div');
@@ -223,10 +226,30 @@ async function createEdgeFields() {
         group.appendChild(toInput);
     }
 
+    let undoButton = document.createElement('button');
+    undoButton.className = 'undo-btn btn btn-danger mx-1';
+    undoButton.innerHTML = '<i class="fas fa-undo-alt"></i>';
+    undoButton.setAttribute('type', 'button');
+    undoButton.setAttribute('onclick', 'return undoEdgeFields();');
+    readerForm.querySelector('.form-submit-group').appendChild(undoButton);
+
     readerForm.querySelector('#numVertexes').disabled = true;
     readerForm.querySelector('#numEdges').disabled = true;
     removeAlerts('danger');
     readerForm.querySelector('button[type="submit"]').innerHTML = 'Visualizar grafo';
+}
+
+/**
+ * Returns the form to its first state by removing all edge field and re-enabling the number fields.
+ */
+async function undoEdgeFields() {
+    readerForm.querySelector('.edge-group').remove();
+    readerForm.querySelector('.undo-btn').remove();
+    if (typeof visualGraph === 'object') visualGraph.destroy();
+    document.querySelector('#adjacency-list').innerHTML = null;
+    readerForm.querySelector('#numVertexes').disabled = false;
+    readerForm.querySelector('#numEdges').disabled = false;
+    readerForm.querySelector('button[type="submit"]').innerHTML = 'Definir arestas';
 }
 
 /**

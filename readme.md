@@ -1,4 +1,5 @@
-# Graph Reader
+
+# ![graph-reader-png](https://user-images.githubusercontent.com/20175697/59568959-188e9f80-9059-11e9-8dcf-3d3ffcb5b2f2.png) Graph Reader
 
 Este projeto foi criado para um trabalho avaliativo da disciplina de Estrutura de Dados II do curso de Ciência da Computação na Universidade Feevale
 
